@@ -9,17 +9,17 @@ import config
 from chaos_watcher import ChaosWatcher
 
 def main():
-    if not os.path.exists(config.watcher['chaos']):
-        os.makedirs(config.watcher['chaos'])
+    if not os.path.exists(config.paths['chaos']):
+        os.makedirs(config.paths['chaos'])
 
-    if not os.path.exists(config.watcher['order']):
-        os.makedirs(config.watcher['order'])
+    if not os.path.exists(config.paths['order']):
+        os.makedirs(config.paths['order'])
 
     observer = Observer()
-    observer.schedule(ChaosWatcher(), config.watcher['chaos'], recursive=True)
+    observer.schedule(ChaosWatcher(), config.paths['chaos'], recursive=True)
     observer.start()
 
-    print('Watching chaos dir: ', config.watcher['chaos'])
+    print('Watching chaos dir: ', config.paths['chaos'])
 
     try:
         while True:
