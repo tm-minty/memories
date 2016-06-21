@@ -2,14 +2,20 @@
 Photo and video organizer
 
 ##Requirements
-* GExiv2
+* python-gi
+* GExiv2 (gir1.2-gexiv2-0.10)
 
 
-##Install requirements
-```bash
-sudo apt-get install python3-gi
-```
+##Install PyPI requirements
 
 ```bash
 sudo pip3 install -r requirements.txt
+```
+
+###Configure
+Update paths in `config.py`
+
+##Run
+```sh
+./memories.py
 ```
