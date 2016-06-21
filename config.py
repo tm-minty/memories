@@ -1,4 +1,9 @@
+import logging
+
 DEBUG = True
+
+debug_level = logging.ERROR
+log_file = None
 
 paths = {
     'chaos': '/tmp/memories/chaos',
