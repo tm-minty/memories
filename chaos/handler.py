@@ -1,21 +1,19 @@
+import logging
 import os
 
 import config
 
+import gi
+gi.require_version('GExiv2', '0.10')
 from gi.repository import GExiv2
 
 
 class ChaosHandler():
-    def __init__(self):
-        print('Hello, I\'m ChaosHandler')
 
     def image(self, path):
-        print('image %s' % path)
+        logging.info('Processing image %s' % path)
 
         exif = GExiv2.Metadata(path)
-
-        for p in dir(exif):
-            print(p)
 
         created_at = exif.get_date_time()
 
@@ -25,8 +23,13 @@ class ChaosHandler():
             '%02d' % created_at.month,
             '%02d' % created_at.day,
         )
+        logging.info('Moving image to %s' % move_to)
 
         if not os.path.exists(move_to):
+            logging.info(""" Destination path doesn\'t exists... \
+                Making directory...""")
             os.makedirs(move_to)
 
-        os.rename(path, os.path.join(move_to, os.path.basename(path)))
+        destination = os.path.join(move_to, os.path.basename(path))
+        logging.info('%s \t => \t %s' % (path, destination))
+        os.rename(path, destination)

@@ -3,7 +3,7 @@ Photo and video organizer
 
 ##Requirements
 * python-gi
-* GExiv2 (gir1.2-gexiv2-0.10)
+* GExiv2 v0.10 (gir1.2-gexiv2-0.10)
 
 
 ##Install PyPI requirements

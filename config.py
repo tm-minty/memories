@@ -1,3 +1,5 @@
+DEBUG = True
+
 paths = {
     'chaos': '/tmp/memories/chaos',
     'order': '/tmp/memories/order',

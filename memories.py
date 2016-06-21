@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
+import logging
 import os
 import time
 
-from chaos_watcher import ChaosWatcher
+from chaos.watcher import ChaosWatcher
 
 import config
 
@@ -11,6 +12,8 @@ from watchdog.observers import Observer
 
 
 def main():
+    logging.basicConfig(level=logging.DEBUG)
+
     if not os.path.exists(config.paths['chaos']):
         os.makedirs(config.paths['chaos'])
 
@@ -21,7 +24,7 @@ def main():
     observer.schedule(ChaosWatcher(), config.paths['chaos'], recursive=True)
     observer.start()
 
-    print('Watching chaos dir: ', config.paths['chaos'])
+    logging.info('Watching chaos dir: %s' % config.paths['chaos'])
 
     try:
         while True:
