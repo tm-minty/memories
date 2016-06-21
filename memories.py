@@ -38,9 +38,9 @@ def main(argv):
             usage()
             sys.exit()
         elif opt in ('-V', '--verbose'):
-            debug_level = logging.DEBUG
+            debug_level = logging.INFO
         elif opt in ('-l', '--log'):
-            debug_level = logging.DEBUG
+            debug_level = logging.INFO
             log_file = arg
 
     logging.basicConfig(

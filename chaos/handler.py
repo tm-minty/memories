@@ -1,5 +1,6 @@
 import logging
 import os
+import shutil
 
 import config
 
@@ -27,9 +28,24 @@ class ChaosHandler():
 
         if not os.path.exists(move_to):
             logging.info(""" Destination path doesn\'t exists... \
-                Making directory...""")
+Making directory...""")
             os.makedirs(move_to)
 
         destination = os.path.join(move_to, os.path.basename(path))
+
+        i = 1
+        while os.path.exists(destination):
+            filename, extension = os.path.basename(path).split('.')
+            destination = os.path.join(
+                move_to,
+                os.path.basename(
+                    ".".join([
+                        "%s_%03d" % (filename, i),
+                        extension
+                    ])
+                )
+            )
+            i += 1
+
         logging.info('%s \t => \t %s' % (path, destination))
-        os.rename(path, destination)
+        shutil.move(path, destination)

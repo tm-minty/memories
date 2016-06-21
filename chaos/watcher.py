@@ -26,8 +26,3 @@ class ChaosWatcher(FileSystemEventHandler):
 
             if mimetype in config.types['images']:
                 self.chaos_handler.image(event.src_path)
-
-    # DEBUG ONLY
-    def on_modified(self, event):
-        if config.DEBUG:
-            self.on_created(event)
