@@ -3,10 +3,12 @@
 import os
 import time
 
-from watchdog.observers import Observer
+from chaos_watcher import ChaosWatcher
 
 import config
-from chaos_watcher import ChaosWatcher
+
+from watchdog.observers import Observer
+
 
 def main():
     if not os.path.exists(config.paths['chaos']):
@@ -31,4 +33,4 @@ def main():
 
 
 if __name__ == '__main__':
-	main()
+    main()
