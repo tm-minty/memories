@@ -1,3 +1,5 @@
+"""Chaos handler."""
+
 import logging
 import os
 import shutil
@@ -10,8 +12,10 @@ from gi.repository import GExiv2
 
 
 class ChaosHandler():
+    """Files handler."""
 
     def image(self, path):
+        """Handle image files."""
         logging.info('Processing image %s' % path)
 
         exif = GExiv2.Metadata(path)
