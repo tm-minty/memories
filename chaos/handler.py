@@ -1,6 +1,7 @@
 """Chaos handler."""
 
 import logging
+import mimetypes
 import os
 import shutil
 
@@ -13,6 +14,17 @@ from gi.repository import GExiv2
 
 class ChaosHandler():
     """Files handler."""
+
+    def file(self, path):
+        """Detect file type and handle it."""
+        mimetype, encoding = mimetypes.guess_type(path)
+
+        logging.info('MimeType: %s' % (
+            mimetype if mimetype else 'unknown'
+        ))
+
+        if mimetype in config.types['images']:
+            self.chaos_handler.image(path)
 
     def image(self, path):
         """Handle image files."""

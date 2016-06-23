@@ -1,11 +1,8 @@
 """Chaos watcher."""
 
 import logging
-import mimetypes
 
 from chaos.handler import ChaosHandler
-
-import config
 
 from watchdog.events import FileSystemEventHandler
 
@@ -23,11 +20,4 @@ class ChaosWatcher(FileSystemEventHandler):
         ))
 
         if not event.is_directory:
-            mimetype, encoding = mimetypes.guess_type(event.src_path)
-
-            logging.info('MimeType: %s' % (
-                mimetype if mimetype else 'unknown'
-            ))
-
-            if mimetype in config.types['images']:
-                self.chaos_handler.image(event.src_path)
+            self.chaos_handler.file(event.src_path)
