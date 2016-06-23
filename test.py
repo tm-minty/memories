@@ -18,16 +18,16 @@ def usage():
         print("""
 Create test data.
 -h, --help      Show this text
--f, --folders   Create folders sctructure for recursive folder scan tests
+-d, --directories   Create directories sctructure for recursive directory scan tests
 """)
 
 
 def main(argv):
-    create_folders = False
+    create_directories = False
 
     # Arguments
     try:
-        opts, args = getopt.getopt(argv, ':hf', ['folders', 'help'])
+        opts, args = getopt.getopt(argv, ':hf', ['directories', 'help'])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
@@ -36,8 +36,8 @@ def main(argv):
         if opt in ('-h', '--help'):
             usage()
             sys.exit()
-        elif opt in ('-f', '--folders'):
-            create_folders = True
+        elif opt in ('-d', '--directories'):
+            create_directories = True
 
     test_image = 'tests/data/DSC_1231.JPG'
 
@@ -59,8 +59,8 @@ def main(argv):
 
     shutil.copy2(test_image, config.paths['chaos'])
 
-    if create_folders:
-        folders = [
+    if create_directories:
+        directories = [
             'test',
             'photos',
             'photos/123',
@@ -68,10 +68,10 @@ def main(argv):
             'other',
         ]
 
-        for folder in folders:
-            folder = os.path.join(config.paths['chaos'], folder)
-            os.makedirs(folder)
-            shutil.copy2(test_image, folder)
+        for directory in directories:
+            directory = os.path.join(config.paths['chaos'], directory)
+            os.makedirs(directory)
+            shutil.copy2(test_image, directory)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
