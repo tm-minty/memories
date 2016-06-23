@@ -24,7 +24,7 @@ class ChaosHandler():
         ))
 
         if mimetype in config.types['images']:
-            self.chaos_handler.image(path)
+            self.image(path)
 
     def image(self, path):
         """Handle image files."""

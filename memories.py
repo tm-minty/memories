@@ -22,6 +22,15 @@ Memories. Usage.
 """)
 
 
+def scan_files(directory):
+    f = []
+    for root, subdirs, files in os.walk(directory):
+        for file in files:
+            f.append(os.path.join(root, file))
+
+    return f
+
+
 def main(argv):
     log_file = config.log_file
     debug_level = config.debug_level
@@ -55,8 +64,15 @@ def main(argv):
     if not os.path.exists(config.paths['order']):
         os.makedirs(config.paths['order'])
 
+    watcher = ChaosWatcher()
+
+    logging.info('Scanning chaos dir...')
+    initial_files = scan_files(config.paths['chaos'])
+    for file in initial_files:
+        watcher.chaos_handler.file(file)
+
     observer = Observer()
-    observer.schedule(ChaosWatcher(), config.paths['chaos'], recursive=True)
+    observer.schedule(watcher, config.paths['chaos'], recursive=True)
     observer.start()
 
     logging.info('Watching chaos dir: %s' % config.paths['chaos'])
