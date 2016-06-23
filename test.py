@@ -27,7 +27,7 @@ def main(argv):
 
     # Arguments
     try:
-        opts, args = getopt.getopt(argv, ':hf', ['directories', 'help'])
+        opts, args = getopt.getopt(argv, ':hd', ['directories', 'help'])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
